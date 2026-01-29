@@ -1,0 +1,12 @@
+.row{
+    background-color: white;
+    height: 100px;
+    margin: 0;
+    border-bottom: 1px solid black;
+    font-weight: 700;
+    opacity: 0.5;
+}
+.mainBackground{
+    height:500px;
+    background-color: aquamarine;
+}

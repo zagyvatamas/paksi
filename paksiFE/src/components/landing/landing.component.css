@@ -4,9 +4,21 @@
     margin: 0;
     border-bottom: 1px solid black;
     font-weight: 700;
+    font-size: large;
     opacity: 0.5;
 }
 .mainBackground{
-    height:500px;
+    height:425px;
     background-color: aquamarine;
+}
+.offerwall{
+    height: 500px;
+    background-color: blue;
+}
+.customFooter{
+    background-color: gray;
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

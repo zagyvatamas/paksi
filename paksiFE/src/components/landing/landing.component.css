@@ -12,7 +12,8 @@
     background-color: aquamarine;
 }
 .offerwall{
-    height: 500px;
+    height: 250px;
+    width: 100%;
     background-color: blue;
 }
 .customFooter{
@@ -22,3 +23,50 @@
     bottom: 0;
     width: 100%;
 }
+.customFooter p{
+    margin: 0;
+}
+.customFooter .row{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.carousel{
+    margin: 100px auto;
+    width: 100%;
+    border: 5px solid red;
+    display: flex;
+    overflow-x: auto;
+    gap: 0.5em;
+}
+.carousel::-webkit-scrollbar{
+    display: none;
+}
+.group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    animation: spin 13s infinite linear;
+    padding-right: 0.65em;
+}
+.card{
+    flex: 0 0 5em;
+    height: 175px;
+    background-color: cornflowerblue;
+    font-size: 3rem;
+    border-radius: .2em;
+    text-align: center;
+    align-content: center;
+}
+@keyframes spin {
+    from {translate: 0;}
+    to {translate: -100%;}
+}
+
+.categorys{
+    height: 250px;
+    background-color: red;
+}
+

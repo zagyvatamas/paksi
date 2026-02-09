@@ -1,0 +1,18 @@
+const express = require('express');
+const router = express.Router();
+const db = require('../db');
+
+router.get('/category', (req, res) => {
+  const query = 'SELECT * FROM category';
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Hiba a lekérdezés során:', err);
+      return res.status(500).json({ error: 'Adatbázis hiba' });
+    }
+    
+    res.json(results);
+  });
+});
+
+module.exports = router;

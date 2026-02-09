@@ -6,7 +6,6 @@ const db = require('../db');
 const verifyToken = require('../middleware/verifyToken');
 require('dotenv').config();
 
-// REGISZTRÁCIÓ
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);

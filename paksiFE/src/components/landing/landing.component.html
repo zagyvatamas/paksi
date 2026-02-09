@@ -24,6 +24,9 @@
         </div>
     </nav>
 </div>
+<div class="middle title">
+        <h3>Akciós ajánlatok törzsvásárlóknak</h3>
+    </div>
 <div class="offerwall middle">
     <div class="carousel">
         <div class="group">
@@ -52,8 +55,14 @@
         </div>
     </div>
 </div>
-<div class="categorys">
-
+<div class="categorys middle">
+    <div class="category-card" 
+         *ngFor="let cat of categories" 
+         [style.background-image]="'url(' + cat.imageUrl + ')'">
+        <div class="category-overlay">
+            <span class="category-name">{{ cat.name }}</span>
+        </div>
+    </div>
 </div>
 <div class="customFooter">
     <div class="row">

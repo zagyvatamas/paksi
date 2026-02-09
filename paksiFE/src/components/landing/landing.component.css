@@ -12,7 +12,7 @@
     background-color: aquamarine;
 }
 .offerwall{
-    height: 250px;
+    height: 200px;
     width: 100%;
     background-color: blue;
 }
@@ -34,7 +34,7 @@
 }
 .carousel{
     margin: 100px auto;
-    width: 100%;
+    width: 95%;
     border: 5px solid red;
     display: flex;
     overflow-x: auto;
@@ -54,6 +54,7 @@
 .card{
     flex: 0 0 5em;
     height: 175px;
+    padding: 1em;
     background-color: cornflowerblue;
     font-size: 3rem;
     border-radius: .2em;
@@ -65,8 +66,60 @@
     to {translate: -100%;}
 }
 
-.categorys{
-    height: 250px;
-    background-color: red;
+.categorys {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    background-color: transparent;
+    height: 200px;
+}
+
+.category-card {
+    width: 18rem;
+    height: 12rem; /* Beállíthatod a kívánt magasságot */
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.category-card:hover {
+    transform: scale(1.05); /* Kicsit kiugrik hoverre */
+}
+
+.category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Sötétítés, hogy a fehér szöveg olvasható legyen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.category-card:hover .category-overlay {
+    background: rgba(0, 0, 0, 0.2); /* Hoverre kivilágosodik a kép */
+}
+
+.category-name {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Extra biztonság az olvashatóságért */
+}
+.title{
+    height: 50px;
 }
 

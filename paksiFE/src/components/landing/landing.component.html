@@ -24,34 +24,19 @@
         </div>
     </nav>
 </div>
-<div class="middle title">
-        <h3>Akciós ajánlatok törzsvásárlóknak</h3>
-    </div>
 <div class="offerwall middle">
     <div class="carousel">
-        <div class="group">
-            <div class="card">1</div>
-            <div class="card">2</div>
-            <div class="card">3</div>
-            <div class="card">4</div>
-            <div class="card">5</div>
-            <div class="card">6</div>
-        </div>
-        <div aria-hidden class="group">
-            <div class="card">1</div>
-            <div class="card">2</div>
-            <div class="card">3</div>
-            <div class="card">4</div>
-            <div class="card">5</div>
-            <div class="card">6</div>
-        </div>
-        <div aria-hidden class="group">
-            <div class="card">1</div>
-            <div class="card">2</div>
-            <div class="card">3</div>
-            <div class="card">4</div>
-            <div class="card">5</div>
-            <div class="card">6</div>
+        <div class="group" *ngFor="let i of [1, 2, 3]"> 
+            <div class="discount-card" 
+                 *ngFor="let disc of discounts" 
+                 [style.background-image]="'url(' + disc.imageUrl + ')'">
+                <div class="discount-overlay">
+                    <div class="discount-info">
+                        <span class="discount-name">{{ disc.name }}</span>
+                        <span class="discount-value">-{{ disc.discountPercent }}%</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -11,10 +11,13 @@
     height:425px;
     background-color: aquamarine;
 }
-.offerwall{
-    height: 200px;
+.offerwall {
+    height: 225px;
     width: 100%;
-    background-color: blue;
+    background-color: transparent;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 .customFooter{
     background-color: gray;
@@ -32,24 +35,21 @@
     justify-content: center;
     align-items: center;
 }
-.carousel{
-    margin: 100px auto;
-    width: 95%;
-    border: 5px solid red;
+.carousel {
+    width: 100%;
     display: flex;
-    overflow-x: auto;
-    gap: 0.5em;
+    overflow: hidden;
+    user-select: none;
 }
 .carousel::-webkit-scrollbar{
     display: none;
 }
-.group{
+.group {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1em;
-    animation: spin 13s infinite linear;
-    padding-right: 0.65em;
+    gap: 20px;
+    padding-right: 20px;
+    animation: spin 35s infinite linear;
 }
 .card{
     flex: 0 0 5em;
@@ -121,5 +121,44 @@
 }
 .title{
     height: 50px;
+}
+
+.discount-card {
+    flex: 0 0 250px; /* Fix szélesség a carouselben */
+    height: 150px;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.discount-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+.discount-info {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.discount-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.discount-value {
+    color: #ff4757; /* Kiemelt akciós szín */
+    font-weight: 800;
+    font-size: 1.4rem;
 }
 

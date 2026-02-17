@@ -4,6 +4,7 @@ const app = express();
 const authRoutes = require('./routes/auth');
 const imageRoutes = require('./routes/images');
 const categoryRoutes = require('./routes/category');
+const discountRoutes = require('./routes/discount');
 const cors = require('cors');
 
 app.use(cors({
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/images', imageRoutes);
 app.use('/api/', categoryRoutes);
+app.use('/api/', discountRoutes);
 
 app.listen(3000, () => {
   console.log('Szerver fut a 3000-es porton');

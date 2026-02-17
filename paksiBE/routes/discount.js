@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-router.get('/category', (req, res) => {
+router.get('/discount', (req, res) => {
   const query = 'SELECT * FROM discount';
 
   db.query(query, (err, results) => {

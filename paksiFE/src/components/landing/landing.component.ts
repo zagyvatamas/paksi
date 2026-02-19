@@ -4,10 +4,11 @@ import { Category } from '../../interfaces/category';
 import { CategoryService } from '../../service/category.service';
 import { DiscountService } from '../../service/discount.service';
 import { Discount } from '../../interfaces/discount';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-landing',
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarComponent],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })

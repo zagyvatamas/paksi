@@ -1,2 +1,28 @@
 <app-navbar></app-navbar>
+<div class="filter-container">
+  <input 
+    type="text" 
+    [(ngModel)]="searchText" 
+    placeholder="Keresés név alapján..."
+    class="search-input">
 
+  <div class="radio-group">
+    <label *ngFor="let cat of categories">
+      <input 
+        type="radio" 
+        name="category" 
+        [value]="cat" 
+        [(ngModel)]="selectedCategory">
+      {{ cat }}
+    </label>
+  </div>
+
+  <hr>
+
+  <ul>
+    <li *ngFor="let item of filteredProducts">
+      {{ item.name }} - <strong>{{ item.category }}</strong>
+    </li>
+    <li *ngIf="filteredProducts.length === 0">Nincs találat.</li>
+  </ul>
+</div>

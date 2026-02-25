@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FormsModule } from '@angular/forms';
+import { ProductService } from '../../service/product.service';
+import { Products } from '../../interfaces/products';
 
 @Component({
   selector: 'app-products',
@@ -10,26 +12,30 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
-  // Alapadatok
-  products = [
-    { name: 'iPhone 15', category: 'Elektronika' },
-    { name: 'Kenyér', category: 'Élelmiszer' },
-    { name: 'Monitor', category: 'Elektronika' },
-    { name: 'Alma', category: 'Élelmiszer' },
-  ];
+  searchTerm: string = '';
+  products:Products[] = [];
+  filters = [];
 
-  // Filter állapotok
-  searchText = '';
-  selectedCategory = 'Összes';
-  categories = ['Összes', 'Elektronika', 'Élelmiszer'];
+  constructor(private productService: ProductService) {}
 
-  // A szűrési logika
+  ngOnInit(){
+    this.productService.getProducts()
+    .subscribe({
+      next:(data) => {
+        this.products = data
+        console.log(this.products);
+        
+      },
+      error: (err) => {
+        console.error('Hiba történt a lekérés során:', err);
+      }
+    })
+  }
+
+
   get filteredProducts() {
-    return this.products.filter(product => {
-      const matchesSearch = product.name.toLowerCase().includes(this.searchText.toLowerCase());
-      const matchesCategory = this.selectedCategory === 'Összes' || product.category === this.selectedCategory;
-      
-      return matchesSearch && matchesCategory;
-    });
+    return this.products.filter(p => 
+      p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }

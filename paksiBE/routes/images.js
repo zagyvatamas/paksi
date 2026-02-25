@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// GET /imageData - adat lekérdezés
+
 router.get('/imageData', async (req, res) => {
   const query = 'SELECT * FROM images';
 

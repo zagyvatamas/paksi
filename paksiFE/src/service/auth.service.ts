@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap, throwError } from 'rxjs';
 import { Profile } from '../interfaces/profile';
+import { RegisterData } from '../interfaces/register';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class AuthService {
     });
   }
 
+  register(username: string,email:string, password: string): Observable<RegisterData> {
+    return this.http.post<RegisterData>(`${this.apiUrl}/auth/register`, {username, email, password})
+  }
+
   getProfile(): Observable<any> {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -45,4 +50,5 @@ export class AuthService {
     const headers = this.getAuthHeaders();
     return this.http.get<any>(`${this.apiUrl}/auth/profile`, { headers });
   }
+
 }

@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NavbarComponent, RouterOutlet],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -33,5 +34,9 @@ export class LoginComponent {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']); 
+  }
+
+  navigateToRegister() {
+    this.router.navigate(['register'])
   }
 }

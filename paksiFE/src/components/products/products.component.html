@@ -1,56 +1,112 @@
 <app-navbar></app-navbar>
-<div class="container mt-4">
-  <div class="row mb-4">
-    <div class="col-md-6 offset-md-3">
-      <input 
-        type="text" 
-        class="form-control" 
-        placeholder="Termék keresése..." 
-        [(ngModel)]="searchTerm">
-    </div>
-  </div>
 
+<div class="container-fluid mt-4">
   <div class="row">
-    <div class="col-6 col-sm-4 col-lg-3 mb-4" *ngFor="let product of filteredProducts">
-      <div class="card h-100 shadow-sm">
-        
-        <span *ngIf="product.discountPercent>0" class="badge bg-danger position-absolute m-2" style="top:0; right:0;">AKCIÓ</span>
-        
-        <img [src]="product.imageUrl" class="card-img-top p-3" [alt]="product.name">
-        
-        <div class="card-body">
-          <h5 class="card-title text-primary">{{ product.name }}</h5>
-          <p class="text-muted">Kiszerelés: {{ product.handle }}</p>
-          
-          <hr>
-          
-          <div class="d-flex justify-content-between">
-            <span>Kisker ár:</span>
-            <span class="fw-bold text-dark">{{ product.retailPrice | number }} Ft</span>
-          </div>
-          <div class="d-flex justify-content-between">
-            <span>Nagyker ár:</span>
-            <span class="text-secondary font-monospace">{{ product.wholesalePrice | number }} Ft</span>
+    <div class="col-lg-3 col-md-4 mb-4">
+      <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0"><i class="bi bi-filter"></i> Szűrők</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="accordion accordion-flush" id="filterAccordion">
+
+            <div class="accordion-item" *ngFor="let cat of categories; let i = index">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#collapse' + i">
+                  {{ cat }}
+                </button>
+              </h2>
+
+              <div [id]="'collapse' + i" class="accordion-collapse collapse">
+                <div class="accordion-body">
+
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" [id]="'main'+i"
+                      (change)="toggleFilter('categories', cat)">
+                    <label class="form-check-label fw-bold" [for]="'main'+i">Összes {{ cat }}</label>
+                  </div>
+
+                  <hr>
+
+                  <h6 class="small text-muted">Kiszerelés:</h6>
+                  <div class="form-check" *ngFor="let size of getFieldsByCategory(cat, 'handle')">
+                    <input class="form-check-input" type="checkbox" [id]="cat + size"
+                      (change)="toggleFilter('sizes', size)">
+                    <label class="form-check-label" [for]="cat + size">{{ size }}</label>
+                  </div>
+
+                  <hr>
+
+                  <h6 class="small text-muted">Típus:</h6>
+                  <div class="form-check" *ngFor="let pack of getFieldsByCategory(cat, 'storageType')">
+                    <input class="form-check-input" type="checkbox" [id]="cat + pack"
+                      (change)="toggleFilter('packaging', pack)">
+                    <label class="form-check-label" [for]="cat + pack">{{ pack }}</label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
-
-        <div class="card-footer bg-white border-top-0 pb-3">
-          <div *ngIf="product.available; else outOfStock" class="text-success small mb-2">
-            <i class="bi bi-check-circle-fill"></i> Raktáron
-          </div>
-          <ng-template #outOfStock>
-            <div class="text-danger small mb-2">
-              <i class="bi bi-x-circle-fill"></i> Jelenleg nem elérhető
-            </div>
-          </ng-template>
-
-          <button class="btn btn-outline-primary w-100" [disabled]="!product.available">Kosárba</button>
+        <div class="card-footer bg-light">
+          <button class="btn btn-sm btn-outline-secondary w-100">Szűrők törlése</button>
         </div>
       </div>
     </div>
-  </div>
-  
-  <div *ngIf="filteredProducts.length === 0" class="text-center mt-5">
-    <h4>Nincs a keresésnek megfelelő termék.</h4>
+
+    <div class="col-lg-9 col-md-8">
+      <div class="row mb-4">
+        <div class="col-12">
+          <input type="text" class="form-control shadow-sm" placeholder="Termék keresése..." [(ngModel)]="searchTerm">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-4 col-md-6 mb-4" *ngFor="let product of filteredProducts">
+          <div class="card h-100 shadow-sm border-0 product-card">
+            <span *ngIf="product.discountPercent > 0" class="badge bg-danger position-absolute m-2"
+              style="top:0; right:0;">AKCIÓ</span>
+            <img [src]="product.imageUrl" class="card-img-top p-3" [alt]="product.name"
+              style="height: 200px; object-fit: contain;">
+
+            <div class="card-body">
+              <h5 class="card-title text-primary">{{ product.name }}</h5>
+              <p class="text-muted small">Kiszerelés: {{ product.handle }}</p>
+              <hr>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small">Kisker:</span>
+                <span class="fw-bold text-dark">{{ product.retailPrice | number }} Ft</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small">Nagyker:</span>
+                <span class="text-secondary font-monospace">{{ product.wholesalePrice | number }} Ft</span>
+              </div>
+            </div>
+
+            <div class="card-footer bg-white border-top-0 pb-3">
+              <div *ngIf="product.available; else outOfStock" class="text-success small mb-2">
+                <i class="bi bi-check-circle-fill"></i> Raktáron
+              </div>
+              <ng-template #outOfStock>
+                <div class="text-danger small mb-2">
+                  <i class="bi bi-x-circle-fill"></i> Nincs készleten
+                </div>
+              </ng-template>
+              <button class="btn btn-primary w-100 rounded-pill" [disabled]="!product.available">Kosárba</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="filteredProducts.length === 0" class="text-center mt-5">
+        <div class="alert alert-light py-5 shadow-sm">
+          <h4>Nincs a keresésnek megfelelő termék.</h4>
+          <p class="text-muted">Próbálkozz más kulcsszóval vagy szűrővel!</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

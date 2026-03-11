@@ -71,34 +71,34 @@ export class ProductsComponent implements OnInit {
     return Array.from(set);
   }
 
-  toggleFilter(type: 'categories' | 'sizes' | 'packaging', value: string) {
-  const index = this.selectedFilters[type].indexOf(value);
+  toggleFilter(type: 'categories' | 'sizes' | 'packaging', value: string, category?: string) {
+  const filterValue = (type !== 'categories' && category) 
+    ? `${category}|${value}` 
+    : value;
+
+  const index = this.selectedFilters[type].indexOf(filterValue);
+  
   if (index === -1) {
-    this.selectedFilters[type].push(value);
+    this.selectedFilters[type].push(filterValue);
   } else {
     this.selectedFilters[type].splice(index, 1);
   }
-  // Itt hívhatod a termékszűrést végző logikádat
 }
 
   get filteredProducts() {
-    return this.products.filter(product => {
-      // 1. Keresőmező
-      const matchesSearch = product.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+  return this.products.filter(product => {
+    const matchesSearch = product.name.toLowerCase().includes(this.searchTerm.toLowerCase());
 
-      // 2. Kategória szűrés
-      const matchesCategory = this.selectedFilters.categories.length === 0 || 
-        this.selectedFilters.categories.includes(product.category);
+    const matchesCategory = this.selectedFilters.categories.length === 0 || 
+                            this.selectedFilters.categories.includes(product.category);
 
-      // 3. Méret szűrés
-      const matchesSize = this.selectedFilters.sizes.length === 0 || 
-        this.selectedFilters.sizes.includes(product.handle);
+    const matchesSize = this.selectedFilters.sizes.length === 0 || 
+                         this.selectedFilters.sizes.includes(`${product.category}|${product.handle}`);
 
-      // 4. Csomagolás szűrés
-      const matchesPackaging = this.selectedFilters.packaging.length === 0 || 
-        this.selectedFilters.packaging.includes(product.storageType);
+    const matchesPackaging = this.selectedFilters.packaging.length === 0 || 
+                              this.selectedFilters.packaging.includes(`${product.category}|${product.storageType}`);
 
-      return matchesSearch && matchesCategory && matchesSize && matchesPackaging;
-    });
-  }
+    return matchesSearch && matchesCategory && matchesSize && matchesPackaging;
+  });
+}
 }

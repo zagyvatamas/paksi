@@ -32,8 +32,8 @@
                   <h6 class="small text-muted">Kiszerelés:</h6>
                   <div class="form-check" *ngFor="let size of getFieldsByCategory(cat, 'handle')">
                     <input class="form-check-input" type="checkbox" [id]="cat + size"
-                      (change)="toggleFilter('sizes', size)">
-                    <label class="form-check-label" [for]="cat + size">{{ size }}</label>
+                      (change)="toggleFilter('sizes', size, cat)"> <label class="form-check-label" [for]="cat + size">{{
+                      size }}</label>
                   </div>
 
                   <hr>
@@ -41,8 +41,8 @@
                   <h6 class="small text-muted">Típus:</h6>
                   <div class="form-check" *ngFor="let pack of getFieldsByCategory(cat, 'storageType')">
                     <input class="form-check-input" type="checkbox" [id]="cat + pack"
-                      (change)="toggleFilter('packaging', pack)">
-                    <label class="form-check-label" [for]="cat + pack">{{ pack }}</label>
+                      (change)="toggleFilter('packaging', pack, cat)"> <label class="form-check-label"
+                      [for]="cat + pack">{{ pack }}</label>
                   </div>
 
                 </div>

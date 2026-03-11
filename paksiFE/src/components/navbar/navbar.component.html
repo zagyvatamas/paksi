@@ -1,42 +1,43 @@
-<nav class="navbar navbar-expand-lg sticky-top">
+<nav class="navbar navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand fw-bold" routerLink="/">
-      <img src="http://localhost:3000/uploads/paksiLogo.png" alt="Logo" width="75" height="75" class="d-inline-block align-text-top me-2">
+      <img src="http://localhost:3000/uploads/paksiLogo.png" alt="Logo" width="75" height="75"
+        class="d-inline-block align-text-top me-2">
     </a>
 
-    <button 
-      class="navbar-toggler" 
-      type="button" 
-      (click)="isMenuCollapsed = !isMenuCollapsed"
-      aria-controls="navbarNav" 
-      aria-expanded="false" 
-      aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed" aria-controls="navbarNav"
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div 
-      class="collapse navbar-collapse justify-content-center" 
-      [class.show]="!isMenuCollapsed" 
-      id="navbarNav">
+    <div class="collapse navbar-collapse justify-content-center" [class.show]="!isMenuCollapsed" id="navbarNav">
       <ul class="navbar-nav middle">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/products" routerLinkActive="active" (click)="isMenuCollapsed = true">Terméklista</a>
+          <a class="nav-link" routerLink="/products" routerLinkActive="active"
+            (click)="isMenuCollapsed = true">Terméklista</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/galeria" routerLinkActive="active" (click)="isMenuCollapsed = true">Galéria</a>
+          <a class="nav-link" routerLink="/galeria" routerLinkActive="active"
+            (click)="isMenuCollapsed = true">Galéria</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/elerhetoseg" routerLinkActive="active" (click)="isMenuCollapsed = true">Elérhetőség</a>
+          <a class="nav-link" routerLink="/elerhetoseg" routerLinkActive="active"
+            (click)="isMenuCollapsed = true">Elérhetőség</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/allasok" routerLinkActive="active" (click)="isMenuCollapsed = true">Állásajánlat</a>
+          <a class="nav-link" routerLink="/allasok" routerLinkActive="active"
+            (click)="isMenuCollapsed = true">Állásajánlat</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active" (click)="isMenuCollapsed = true">Bejelentkezés</a>
+        <li *ngIf="!(isLoggedIn$ | async)" class="nav-item">
+          <a class="nav-link" routerLink="/login" (click)="isMenuCollapsed = true">Bejelentkezés</a>
+        </li>
+
+        <li *ngIf="isLoggedIn$ | async" class="nav-item">
+          <a class="nav-link" routerLink="/profile" (click)="isMenuCollapsed = true">Profil</a>
         </li>
       </ul>
     </div>
-    
+
     <div class="d-none d-lg-flex" style="width: 120px;"></div>
   </div>
 </nav>
